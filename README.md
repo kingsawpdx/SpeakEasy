@@ -1,8 +1,50 @@
-# React + Vite
+# SpeakEasy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight web based AAC built with a React front-end and an Express.js back-end
 
-Currently, two official plugins are available:
+## Team Members:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Marchelle Le
+- Raghad Al Musawi
+- Sawyer King
+
+## How to run as a developer:
+
+Clone the repository to your local environment:
+
+```
+git clone https://github.com/kingsawpdx/SpeakEasy.git
+```
+
+CD into the directory
+
+```
+cd SpeakEasy
+```
+
+Install the necessary dependencies:
+
+```
+npm i
+```
+
+The following steps are easiest when perfomed on a split terminal otherwise two windows of your code editor must be open.
+To set up backend:
+
+CD into /api
+
+```
+cd api
+```
+
+Start the backend to allow the front end to make requests to it.
+
+```
+nodemon api.js
+```
+
+To set up the front-end:
+
+```
+npm run dev
+```
