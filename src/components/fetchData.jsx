@@ -52,7 +52,6 @@ const FetchFromApi = ({ pictogramIds }) => {
           ) : (
             <div className="image-grid">
               {' '}
-              {/* CSS Grid for images */}
               {images.map((image) => (
                 <div key={image.id} className="image-item">
                   <h2>Pictogram ID: {image.id}</h2>
@@ -61,7 +60,6 @@ const FetchFromApi = ({ pictogramIds }) => {
                     alt={`Pictogram ${image.id}`}
                     className="pictogram-image"
                   />{' '}
-                  {/* Render the image */}
                 </div>
               ))}
             </div>

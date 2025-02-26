@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import FetchFromApi from './components/fetchData';
+import FetchFromApi from './components/FetchData';
 
 function App() {
   const [words, setWords] = useState([]);
@@ -25,7 +25,6 @@ function App() {
       </ul>
       <div>
         <h2>ARASAAC Fetching Data</h2>
-        {/* Use the PictogramFetcher component and pass the pictogramIds as a prop */}
         <FetchFromApi pictogramIds={pictogramIds} />
       </div>
     </>
