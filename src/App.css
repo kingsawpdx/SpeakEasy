@@ -40,3 +40,20 @@
 .read-the-docs {
   color: #888;
 }
+/* PictogramFetcher.css */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Creates 4 equal columns */
+  gap: 16px; /* Adds space between the images */
+  padding: 16px; /* Adds padding around the grid */
+}
+
+.image-item {
+  text-align: center; /* Centers text below the image */
+}
+
+.pictogram-image {
+  width: 100%;  /* Makes the image fill the width of the container */
+  max-width: 250px; /* Limits the maximum size of the image */
+  height: auto;  /* Maintains aspect ratio */
+}
