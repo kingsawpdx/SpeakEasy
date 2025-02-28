@@ -1,5 +1,9 @@
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./App.css";
+import Home from "./Home/Home";
+import Login from "./Login/Login";
+import SignUp from "./SignUp/SignUp";
 
 function App() {
   const [words, setWords] = useState([]);
@@ -14,28 +18,17 @@ function App() {
   }, []);
 
   return (
-    <>
-      <h1>SpeakEasy</h1>
-      <ul>
-        {words.map((word, index) => (
-          <li key={index}>{word.word}</li>
-        ))}
-      </ul>
-    </>
-  );
+    <Router>
+      <nav>
+        <Link to="/">Home</Link> | <Link to="/login">Login</Link> | <Link to="/signup">Sign Up</Link>
+      </nav>
 
-  return (
-    <div className="container">
-      <h1>SpeakEasy</h1>
-      <div className="grid">
-        {words.map((word, index) => (
-          <div key={index} className="card">
-            <img src={word.image_url} alt={word.word} className="word-image" />
-            <p>{word.word}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+      <Routes>
+        <Route path="/" element={<Home words={words} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
+    </Router>
   );
 
 }
