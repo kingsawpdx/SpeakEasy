@@ -28,6 +28,12 @@ app.get("/words", async (req, res) => {
   res.json(data);
 });
 
+app.get("/categories", async (req, res) => {
+  const { data, error } = await supabase.from("categories").select();
+  if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
+});
+
 app.post("/words", async (req, res) => {
   const { data, error } = await supabase.from("words").insert({
     word: req.body.word,
