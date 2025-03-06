@@ -48,3 +48,9 @@ To set up the front-end:
 ```
 npm run dev
 ```
+
+Install React Router
+
+```
+npm install react-router-dom
+```

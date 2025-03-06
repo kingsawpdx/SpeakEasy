@@ -1,5 +1,11 @@
-import { useEffect, useState } from "react";
-import "./App.css";
+import { useState, useEffect } from "react";
+import React from "react"; 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import NavBar from "../components/NavBar/NavBar"; // Ensure the correct path
+import Login from "../Login/Login"; // Corrected path
+import SignUp from "../SignUp/SignUp"; // Ensure correct import
+import Home from "../Home/Home"; // Ensure correct import
+
 
 function App() {
   const [words, setWords] = useState([]);
@@ -14,15 +20,16 @@ function App() {
   }, []);
 
   return (
-    <>
-      <h1>SpeakEasy</h1>
-      <ul>
-        {words.map((word, index) => (
-          <li key={index}>{word.word}</li>
-        ))}
-      </ul>
-    </>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
+    </Router>
   );
+
 }
 
 export default App;
