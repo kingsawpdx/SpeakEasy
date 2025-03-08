@@ -14,6 +14,7 @@ const CategoryPage = () => {
         {filteredWords.map((word) => (
           <li key={word.id}>
             <button style={{ width: "200px", margin: "10px" }}>
+            {word.image && <img src={word.image} alt={word.word} />}
               {word.word}
             </button>
           </li>
