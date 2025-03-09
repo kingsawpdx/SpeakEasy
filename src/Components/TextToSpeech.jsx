@@ -6,14 +6,16 @@ function TextToSpeech({ data, playAudio, displaySettings, changeSettings }) {
   const [rate, setRate] = useState(1);
 
   if (playAudio) {
-    const speechSynthesis = window.speechSynthesis;
-    const audio = new SpeechSynthesisUtterance(data);
-
-    audio.voice = voice;
-    audio.pitch = pitch;
-    audio.rate = rate;
-
-    speechSynthesis.speak(audio);
+    try {
+      const speechSynthesis = window.speechSynthesis;
+      const audio = new SpeechSynthesisUtterance(data);
+      audio.voice = voice;
+      audio.pitch = pitch;
+      audio.rate = rate;
+      speechSynthesis.speak(audio);
+    } catch (error) {
+      console.error("Speech synthesis failed:", error);
+    }
   }
 
   const handleVoiceChange = (event) => {

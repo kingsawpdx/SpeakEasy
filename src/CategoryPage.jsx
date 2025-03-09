@@ -14,6 +14,7 @@ const CategoryPage = () => {
   // const [settings, setSettings] = useState(false);
 
   const words = location.state?.words || [];
+  const category = location.state?.category || "";
 
   const filteredWords = words.filter((word) => word.category == categoryId);
 
@@ -43,6 +44,7 @@ const CategoryPage = () => {
   return (
     <div className="word-list-container">
       <Header
+        category={category}
         text={text}
         clearHeader={() => clearHeader()}
         playHeader={() => playHeader()}

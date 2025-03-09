@@ -40,10 +40,10 @@ const Homepage = () => {
                 className="col-md-3 col-sm-4 col-xs-6 mb-4 "
               >
                 <Link
-                  className="btn w-100 h-100 text-center p-3 d-flex flex-column justify-content-center align-items-center bg-info"
+                  className="category-button"
                   key={category.id}
                   to={`/category/${category.id}`}
-                  state={{ words: words }}
+                  state={{ words: words, category: category.name }}
                 >
                   {categoryWord && (
                     <img
@@ -56,7 +56,13 @@ const Homepage = () => {
                       }}
                     />
                   )}
-                  <span>{category.name}</span>
+                  <span>
+                    {
+                      (category.name =
+                        category.name.charAt(0).toUpperCase() +
+                        category.name.slice(1))
+                    }
+                  </span>
                 </Link>
               </div>
             );

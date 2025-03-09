@@ -1,4 +1,8 @@
-const Header = ({ text, clearHeader, playHeader }) => {
+const Header = ({ category, text, clearHeader, playHeader }) => {
+  if (category) {
+    console.log(category);
+    category = category.charAt(0).toUpperCase() + category.slice(1);
+  }
   return (
     <div
       className="fixed-top bg-light text-dark p-3"
@@ -22,31 +26,44 @@ const Header = ({ text, clearHeader, playHeader }) => {
           height: "60px",
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-end",
+          justifyContent: "space-between",
           padding: "10px",
           zIndex: 1,
         }}
       >
         <button
-          onClick={clearHeader}
+          onClick={() => history.back()}
           style={{
             backgroundColor: "grey",
             borderRadius: "10px",
             marginRight: "10px",
           }}
         >
-          Clear
+          Back
         </button>
-        <button
-          onClick={playHeader}
-          style={{
-            backgroundColor: "grey",
-            borderRadius: "10px",
-            marginRight: "10px",
-          }}
-        >
-          Play
-        </button>
+        <p>{category}</p>
+        <div>
+          <button
+            onClick={clearHeader}
+            style={{
+              backgroundColor: "grey",
+              borderRadius: "10px",
+              marginRight: "10px",
+            }}
+          >
+            Clear
+          </button>
+          <button
+            onClick={playHeader}
+            style={{
+              backgroundColor: "grey",
+              borderRadius: "10px",
+              marginRight: "10px",
+            }}
+          >
+            Play
+          </button>
+        </div>
       </div>
     </div>
   );
