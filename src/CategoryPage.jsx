@@ -19,7 +19,7 @@ const CategoryPage = () => {
   const filteredWords = words.filter((word) => word.category == categoryId);
 
   const handlePlay = (word) => {
-    setText(text + " " + word);
+    setText((previousdata) => previousdata + " " + word);
     setInput(word);
     setPlay(true);
   };
