@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import "./WelcomePage.css";
+import { useNavigate } from "react-router-dom";
 
 const WelcomePage = () => {
+  const navigate = useNavigate();
   return (
     <div className="welcome-container">
       <header className="welcome-header">

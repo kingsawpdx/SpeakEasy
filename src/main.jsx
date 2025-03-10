@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')).render(
       <Route path="/" element={<App />} />
       <Route path="/category/:categoryId" element={<CategoryPage />} />
       <Route path="/welcome" element={<WelcomePage />} />
-      <Route path="/home" element={<Homepage />} /> {/* Added this route */}
+      <Route path="/home" element={<Homepage />} /> 
     </Routes>
   </BrowserRouter>
 );
