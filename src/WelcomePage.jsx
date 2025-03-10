@@ -1,6 +1,8 @@
+//npm install react-icons
 import { Link } from "react-router-dom";
 import "./WelcomePage.css";
 import { useNavigate } from "react-router-dom";
+import { FaEnvelope, FaYoutube, FaInstagram } from "react-icons/fa";
 
 const WelcomePage = () => {
   const navigate = useNavigate();
@@ -22,9 +24,9 @@ const WelcomePage = () => {
       <footer className="welcome-footer">
         <h3>Contacts</h3>
         <ul>
-          <li><i className="icon-envelope"></i> Some text</li>
-          <li><i className="icon-youtube"></i> Some text</li>
-          <li><i className="icon-instagram"></i> Some text</li>
+          <li><FaEnvelope /> <a href="mailto:SpeakEasy@example.com">SpeakEasy@example.com</a></li>
+          <li><FaYoutube style={{ color: "red" }} /> <a href="https://www.youtube.com/yourchannel" target="_blank" rel="noopener noreferrer">YouTube Channel</a></li>
+          <li><FaInstagram style={{ color: "#E1306C" }} /> <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer">Instagram Profile</a></li>
         </ul>
       </footer>
     </div>
