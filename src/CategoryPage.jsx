@@ -1,7 +1,11 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "./Header";
-import TextToSpeech from "./Components/TextToSpeech";
+import TextToSpeech from "../components/TextToSpeech"; 
+
+
+//console.log(require.resolve("../components/TextToSpeech"));
+
 
 const CategoryPage = () => {
   const location = useLocation();
