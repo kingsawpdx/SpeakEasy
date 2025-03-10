@@ -1,23 +1,38 @@
 //npm install react-icons
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./WelcomePage.css";
-import { useNavigate } from "react-router-dom";
 import { FaEnvelope, FaYoutube, FaInstagram } from "react-icons/fa";
 
 const WelcomePage = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <div className="welcome-container">
       <header className="welcome-header">
         <h1 className="logo">SpeakEasy</h1>
-        <button className="menu-button">☰</button>
+        <button className="menu-button" onClick={toggleMenu}>☰</button>
+
+        {menuOpen && (
+          <div className="dropdown-menu">
+            <Link to="/login" className="menu-item">Login</Link>
+            <Link to="/signup" className="menu-item">Sign Up</Link>
+          </div>
+        )}
       </header>
+
+
       <div className="content">
         <p className="intro-text">
           SpeakEasy is an Augmentative and Alternative Communication (AAC) web
           app designed to assist individuals in communication.
         </p>
-        <Link to="/" className="start-button">
+        <Link to="/home" className="start-button">
           Let's Get Started →
         </Link>
       </div>
