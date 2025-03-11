@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Header from "./Header";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Header from './Header';
 
 const Homepage = () => {
   const [categories, setCategories] = useState([]);
@@ -10,14 +10,14 @@ const Homepage = () => {
   // Fetch categories and words
   useEffect(() => {
     Promise.all([
-      fetch("http://localhost:3000/categories").then((res) => res.json()),
-      fetch("http://localhost:3000/words").then((res) => res.json()),
+      fetch('http://localhost:3000/categories').then((res) => res.json()),
+      fetch('http://localhost:3000/words').then((res) => res.json()),
     ])
       .then(([categoriesData, wordsData]) => {
         setCategories(categoriesData);
         setWords(wordsData);
       })
-      .catch((error) => console.error("Error fetching data:", error))
+      .catch((error) => console.error('Error fetching data:', error))
       .finally(() => setLoading(false));
   }, []);
 
@@ -37,10 +37,10 @@ const Homepage = () => {
             return (
               <div
                 key={category.id}
-                className="col-md-3 col-sm-4 col-xs-6 mb-4"
+                className="col-6 col-sm-4 col-md-3 col-lg-3 d-flex align-items-stretch mt-5"
               >
                 <Link
-                  className="category-button"
+                  className="category-button mt-3"
                   to={`/category/${category.id}`}
                   state={{ words: words, category: category.name }}
                 >
@@ -50,8 +50,8 @@ const Homepage = () => {
                       alt={category.name}
                       className="mb-3"
                       style={{
-                        height: "100px",
-                        objectFit: "contain",
+                        height: '100px',
+                        objectFit: 'contain',
                       }}
                     />
                   )}
