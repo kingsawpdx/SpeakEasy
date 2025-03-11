@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-//import { Link } from "react-router";
 import { Link } from "react-router-dom";
-
 import Header from "./Header";
+
 
 const Homepage = () => {
   const [categories, setCategories] = useState([]);
   const [words, setWords] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // Fetch categories and words
   useEffect(() => {
     Promise.all([
       fetch("http://localhost:3000/categories").then((res) => res.json()),
@@ -38,11 +38,10 @@ const Homepage = () => {
             return (
               <div
                 key={category.id}
-                className="col-md-3 col-sm-4 col-xs-6 mb-4 "
+                className="col-md-3 col-sm-4 col-xs-6 mb-4"
               >
                 <Link
                   className="category-button"
-                  key={category.id}
                   to={`/category/${category.id}`}
                   state={{ words: words, category: category.name }}
                 >
@@ -58,11 +57,8 @@ const Homepage = () => {
                     />
                   )}
                   <span>
-                    {
-                      (category.name =
-                        category.name.charAt(0).toUpperCase() +
-                        category.name.slice(1))
-                    }
+                    {category.name.charAt(0).toUpperCase() +
+                      category.name.slice(1)}
                   </span>
                 </Link>
               </div>
