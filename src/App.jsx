@@ -1,32 +1,25 @@
 import "./App.css";
 import Homepage from "./Homepage";
-import Header from "./Header";
+import { useState } from "react";
+import TextToSpeech from "./Components/TextToSpeech";
+
 
 
 function App() {
-  const [text, setText] = useState(""); //store the text for speech
-  const [playAudio, setPlayAudio] = useState(false); //control speech playback
+  const [displaySettings, setDisplaySettings] = useState(false);
 
-  // Function to trigger speech playback //maybe pass to header 
-  const playHeader = () => {
-    setPlayAudio(true);
-  };
-
-  // Function to clear the text //maybe pass to header as well 
-  const clearHeader = () => {
-    setText("");
+  const changeSettings = () => {
+    setDisplaySettings((prev) => !prev);
   };
 
   return (
-    <>
-    <Header 
-        text={text} 
-        playHeader={playHeader} 
-        clearHeader={clearHeader} 
-      />
+    <div>
       <Homepage />
-    </>
+      <TextToSpeech 
+        displaySettings={displaySettings} 
+        changeSettings={changeSettings} 
+      />
+    </div>
   );
 }
-
 export default App;

@@ -1,10 +1,7 @@
 import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Header from "./Header";
-import TextToSpeech from "../components/TextToSpeech"; 
-
-
-//console.log(require.resolve("../components/TextToSpeech"));
+import TextToSpeech from "./Components/TextToSpeech"; 
 
 
 const CategoryPage = () => {
@@ -15,7 +12,7 @@ const CategoryPage = () => {
 
   const [play, setPlay] = useState(false);
   const [input, setInput] = useState("");
-  // const [settings, setSettings] = useState(false);
+
 
   const words = location.state?.words || [];
   const category = location.state?.category || "";

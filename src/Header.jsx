@@ -1,48 +1,32 @@
-import { useState } from "react"; //manage TextToSpeech visibility
-import TextToSpeech from "../components/TextToSpeech"; 
+import { useState } from "react"; 
+import TextToSpeech from "./Components/TextToSpeech";
 
 const Header = ({ category, text, clearHeader, playHeader }) => {
-  const [showTTS, setShowTTS] = useState(false); //state to track if TextToSpeech is visible
-  const [playAudio, setPlayAudio] = useState(false); //state to trigger speech playback
-
+  const [showTTS, setShowTTS] = useState(false);
+  
   const toggleTTS = () => {
-    setShowTTS((prev) => !prev); //function to toggle the TextToSpeech component
+    setShowTTS((prev) => !prev); 
   };
   
   if (category) {
     console.log(category);
     category = category.charAt(0).toUpperCase() + category.slice(1);
   }
+  
   return (
-    <div
-      className="fixed-top bg-light text-dark p-3"
-      style={{
-        height: "120px",
-        display: "flex",
-        alignItems: "center",
-        //zIndex: 1,
-        zIndex: 2, //make sure it's above other content
-      }}
-    >
-      {/*show selected text */}
-      {text ? (
-        <h5>{text}</h5>
-      ) : (
-        <h5 className="mx-auto">Selected Words Will Appear Here</h5>
-      )}
-
-      {/*a button to toggle the TextToSpeech settings */}
-      <button
-          onClick={toggleTTS}
-          style={{
-            backgroundColor: "blue",
-            color: "white",
-            borderRadius: "10px",
-            padding: "5px 10px",
-          }}
-        >
-          {showTTS ? "Hide Voice Settings" : "Show Voice Settings"}
-        </button>
+    <header
+    className="fixed-top bg-light text-dark p-3"
+    style={{
+      height: "120px",
+      display: "flex",
+      alignItems: "center",
+      zIndex: 2, 
+    }}
+  >
+    <h1>SpeakEasy</h1>
+    <h1>SpeakEasy</h1>
+      {/* Floating button to open TextToSpeech settings */}
+      <button className="tts-toggle-button" onClick={changeSettings}>🎤</button>
 
       <div
         className="fixed-top bg-black text-white fw-bold"
@@ -62,8 +46,7 @@ const Header = ({ category, text, clearHeader, playHeader }) => {
           style={{
             backgroundColor: "grey",
             borderRadius: "10px",
-            marginRight: "10px",
-          }}
+            marginRight: "10px",}}
         >
           Back
         </button>
@@ -74,8 +57,7 @@ const Header = ({ category, text, clearHeader, playHeader }) => {
             style={{
               backgroundColor: "grey",
               borderRadius: "10px",
-              marginRight: "10px",
-            }}
+              marginRight: "10px",}}
           >
             Clear
           </button>
@@ -84,25 +66,13 @@ const Header = ({ category, text, clearHeader, playHeader }) => {
             style={{
               backgroundColor: "grey",
               borderRadius: "10px",
-              marginRight: "10px",
-            }}
+              marginRight: "10px",}}
           >
             Play
           </button>
         </div>
       </div>
-
-      {/*render the TextToSpeech component if showTTS = true */}
-      {showTTS && (
-        <TextToSpeech
-        data={text} // Pass selected text
-        playAudio={playAudio} // Play when triggered
-        displaySettings={showTTS} // Control visibility
-        changeSettings={setShowTTS} // Toggle function
-      />
-      )}
-
-    </div>
+    </header>
   );
 };
 
