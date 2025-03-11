@@ -19,7 +19,7 @@ const CategoryPage = () => {
 
   useEffect(() => {
     const subcategoryList = words.filter(
-      (word) => word.isCategory && word.category == categoryId
+    (word) => word.isCategory && word.category == categoryId && word.isCategoryId != categoryId
     );
     setSubcategories(subcategoryList);
 
