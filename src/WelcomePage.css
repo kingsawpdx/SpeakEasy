@@ -15,6 +15,7 @@
   width: 100%;
   padding: 1rem;
   background-color: black;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -113,7 +114,7 @@
 .dropdown-menu {
   position: absolute;
   top: 60px;
-  right: 10px;
+  right: 50px;
   background: white;
   border: 1px solid black;
   border-radius: 5px;
@@ -135,4 +136,26 @@
 .menu-item:hover {
   background: grey;
   color: white;
+}
+
+
+@media screen and (max-width: 768px) {
+  .welcome-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .dropdown-menu {
+    right: 50%; /* Center dropdown */
+    transform: translateX(50%);
+  }
+
+  .start-button {
+    width: 100%; 
+    font-size: 1.2rem;
+  }
+
+  .welcome-footer ul {
+    flex-direction: column; 
+  }
 }
