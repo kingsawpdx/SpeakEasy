@@ -24,14 +24,20 @@
 }
 
 .word-button {
-  width: 200px;
-  margin: 10px;
-  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: lightyellow;
+  border-radius: 10px;
+  color: darkblue;
   border: 2px solid black;
-  color: black;
-  cursor: pointer;
-  transition: background-color 0.3s ease, color 0.1s ease;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .word-button:hover {
@@ -67,7 +73,7 @@
   align-items: center;
   background-color: lightskyblue;
   border-radius: 10px;
-  color: white;
+  color: darkblue;
   border: 2px solid black;
   text-decoration: none;
   font-weight: bold;
@@ -90,4 +96,7 @@
 
 .read-the-docs {
   color: #888;
+}
+.category-main {
+  margin-top: 120px;
 }

@@ -1,78 +1,112 @@
-import { useParams, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Header from "./Header";
-import TextToSpeech from "./Components/TextToSpeech";
+import { useEffect, useState } from 'react';
+import { useLocation, useParams, Link } from 'react-router-dom';
+import Header from './Header';
+import TextToSpeech from './Components/TextToSpeech';
 
 const CategoryPage = () => {
-  const location = useLocation();
   const { categoryId } = useParams();
+  const location = useLocation();
 
-  const [text, setText] = useState("");
+  const [words] = useState(location.state?.words || []);
+  const [category] = useState(location.state?.category || '');
 
+  const [subcategories, setSubcategories] = useState([]);
+  const [filteredWords, setFilteredWords] = useState([]);
+
+  const [text, setText] = useState('');
   const [play, setPlay] = useState(false);
-  const [input, setInput] = useState("");
-  // const [settings, setSettings] = useState(false);
+  const [input, setInput] = useState('');
 
-  const words = location.state?.words || [];
-  const category = location.state?.category || "";
+  useEffect(() => {
+    const subcategoryList = words.filter(
+    (word) => word.isCategory && word.category == categoryId && word.isCategoryId != categoryId
+    );
+    setSubcategories(subcategoryList);
 
-  const filteredWords = words.filter((word) => word.category == categoryId);
+    const wordList = words.filter(
+      (word) => !word.isCategory && word.category == categoryId
+    );
+    setFilteredWords(wordList);
+  }, [words, categoryId]);
 
   const handlePlay = (word) => {
-    setText((previousdata) => previousdata + " " + word);
+    setText((prevText) => `${prevText} ${word}`);
     setInput(word);
     setPlay(true);
   };
 
-  const clearHeader = () => {
-    setText("");
-  };
-
+  const clearHeader = () => setText('');
   const playHeader = () => {
     setInput(text);
     setPlay(true);
   };
-
-  // const changeSettings = () => {
-  //   setSettings(!settings);
-  // };
-
   useEffect(() => {
-    setPlay(false);
+    if (play) setPlay(false);
   }, [play]);
 
   return (
-    <div className="word-list-container">
+    <div className="container-fluid p-0">
       <Header
         category={category}
         text={text}
-        clearHeader={() => clearHeader()}
-        playHeader={() => playHeader()}
+        clearHeader={clearHeader}
+        playHeader={playHeader}
       />
 
-      <ul className="word-list">
-        {filteredWords.map((word) => (
-          <li key={word.id} style={{ borderRadius: "10px" }}>
-            <button
-              className="word-button"
-              onClick={() => handlePlay(word.word)}
+      <div className="category-main">
+        <div className="row g-4 mt-5">
+          {/* Subcategories (with blue background) */}
+          {subcategories.map((subcategory) => (
+            <div
+              key={subcategory.id}
+              className="col-6 col-sm-4 col-md-3 col-lg-2"
             >
-              {word.image && (
-                <img
-                  className="mb-3"
-                  style={{
-                    height: "100px",
-                    objectFit: "contain",
-                  }}
-                  src={word.image}
-                  alt={word.word}
-                />
-              )}
-              <p>{word.word}</p>
-            </button>
-          </li>
-        ))}
-      </ul>
+              <Link
+                className="category-button text-center p-4"
+                to={`/category/${subcategory.isCategoryId}`}
+                state={{
+                  words: words,
+                  category: subcategory.word,
+                }}
+              >
+                {subcategory.image && (
+                  <img
+                    src={subcategory.image}
+                    alt={subcategory.word}
+                    className="mb-3"
+                    style={{ height: '100px', objectFit: 'contain' }}
+                  />
+                )}
+                <span>
+                  {subcategory.word.charAt(0).toUpperCase() +
+                    subcategory.word.slice(1)}
+                </span>
+              </Link>
+            </div>
+          ))}
+
+          {/* Words (with light yellow background) */}
+          {filteredWords.map((word) => (
+            <div key={word.id} className="col-6 col-sm-4 col-md-3 col-lg-2">
+              <button
+                className="word-button d-block text-center"
+                onClick={() => handlePlay(word.word)}
+              >
+                {word.image && (
+                  <img
+                    className="mb-3"
+                    src={word.image}
+                    alt={word.word}
+                    style={{ height: '100px', objectFit: 'contain' }}
+                  />
+                )}
+                <p>{word.word}</p>
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <TextToSpeech data={input} playAudio={play} />
     </div>
   );
