@@ -34,11 +34,21 @@ app.get("/categories", async (req, res) => {
   res.json(data);
 });
 
+app.post("/categories", async (req, res) => {
+  const { data, error } = await supabase.from("categories").insert({
+    name: req.body.name,
+  });
+  if (error) return res.send(error);
+  res.json({ message: "Successfully added category", addedCategory: data });
+});
+
 app.post("/words", async (req, res) => {
   const { data, error } = await supabase.from("words").insert({
     word: req.body.word,
     image: req.body.image,
-    tags: req.body.tags,
+    category: req.body.category,
+    isCategory: req.body.isCategory,
+    isCategoryId: req.body.isCategoryId,
   });
   if (error) return res.send(error);
   res.json({ message: "Successfully added word", addedWord: data });
@@ -53,7 +63,9 @@ app.put("/words/:id", async (req, res) => {
     .update({
       word: req.body.word,
       image: req.body.image,
-      tags: req.body.tags,
+      category: req.body.category,
+      isCategory: req.body.isCategory,
+      isCategoryId: req.body.isCategoryId,
     })
     .eq("id", id);
 
