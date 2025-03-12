@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./WelcomePage.css";
-import { FaEnvelope, FaYoutube, FaInstagram } from "react-icons/fa";
+import { FaEnvelope, FaYoutube, FaInstagram  } from "react-icons/fa";
 
 const WelcomePage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,15 +15,12 @@ const WelcomePage = () => {
   return (
     <div className="welcome-container">
       <header className="welcome-header">
-        <h1 className="logo">SpeakEasy</h1>
-        <button className="menu-button" onClick={toggleMenu}>☰</button>
-
-        {menuOpen && (
-          <div className="dropdown-menu">
-            <Link to="/login" className="menu-item">Login</Link>
-            <Link to="/signup" className="menu-item">Sign Up</Link>
-          </div>
-        )}
+      <h1 className="logo">SpeakEasy</h1>
+  
+        <div className="auth-buttons">
+          <button className="header-button" onClick={() => navigate("/login")}>Login</button>
+          <button className="header-button signup-button" onClick={() => navigate("/signup")}>Sign Up</button>
+        </div>
       </header>
 
 
@@ -39,7 +36,7 @@ const WelcomePage = () => {
       <footer className="welcome-footer">
         <h3>Contacts</h3>
         <ul>
-          <li><FaEnvelope /> <a href="mailto:SpeakEasy@gmail.com">SpeakEasy@example.com</a></li>
+          <li><FaEnvelope /> <a href="mailto:SpeakEasy@gmail.com">SpeakEasy@gmail.com</a></li>
           <li><FaYoutube style={{ color: "red" }} /> <a href="https://www.youtube.com/yourchannel" target="_blank" rel="noopener noreferrer">YouTube Channel</a></li>
           <li><FaInstagram style={{ color: "#E1306C" }} /> <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer">Instagram Profile</a></li>
         </ul>

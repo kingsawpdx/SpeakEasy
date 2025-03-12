@@ -1,4 +1,4 @@
-const Header = ({ category, text, clearHeader, playHeader }) => {
+const Header = ({ category, text, clearHeader, playHeader, toggleTTS}) => {
   if (category) {
     console.log(category);
     category = category.charAt(0).toUpperCase() + category.slice(1);
@@ -63,6 +63,21 @@ const Header = ({ category, text, clearHeader, playHeader }) => {
           >
             Play
           </button>
+
+          
+          <button
+            onClick={toggleTTS}
+            style={{
+              backgroundColor: "blue",
+              color: "white",
+              borderRadius: "10px",
+              marginRight: "10px",
+            }}
+          >
+            TTS Settings
+          </button>
+
+
         </div>
       </div>
     </div>
