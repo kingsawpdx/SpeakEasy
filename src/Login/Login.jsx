@@ -1,12 +1,9 @@
 
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
-import { Link } from "react-router-dom";
 
- 
-console.log("Login component is rendering!");
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,41 +20,63 @@ const Login = () => {
       setError("Invalid email or password.");
     }
   };
+  
 
   return (
     <div className="auth-container">
-      {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleLogin}>
-        <h2>Login</h2>
-        <div className = "input-wrapper">
-        <input 
-          type="email" 
-          placeholder="Email" 
-          value={email} 
-          onChange={(e) => setEmail(e.target.value)} 
-          required 
-        />
-        <AiOutlineMail className="icon" />
+      <div className="login-box">
+        <h2>Log in with</h2>
+
+        <div className="social-login">
+          <button className="social-button">
+            <img src="google.svg" alt="Google" className = "social-icon" />
+            Google
+          </button>
+
+          <button className ="social-button">  
+          <img src="apple.svg" alt=" Apple" className="social-icon"/>
+          Apple
+          </button>
         </div>
+        
+        <p className="separator"><span>or</span></p>
 
-        <div className = "input-wrapper">
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password} 
-          onChange={(e) => setPassword(e.target.value)} 
-          required 
-        />
-        <AiOutlineLock className="icon" />
-        </div>
+        <form onSubmit={handleLogin}>
+          {error && <p className="error-message">{error}</p>}
 
-        <a href="#" className ="forgot-pass-link">Forgot Password</a>
-        <button className="login-button">Login</button>
-        <p className="signup-text">Don&apos;t have an account? <Link to="/signup">Sign Up Now</Link>
-</p>
+          <div className="input-wrapper">
+            <AiOutlineMail className="input-icon" />
+            <input 
+              type="email" 
+              placeholder="Email address" 
+              value={email} 
+              onChange={(e) => setEmail(e.target.value)} 
+              required 
+            />
+          </div>
 
-      </form>
+          <div className="input-wrapper">
+            <AiOutlineLock className="input-icon" />
+            <input 
+              type="password" 
+              placeholder="Password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+              required 
+            />
+          </div>
+
+          <Link to="#" className="forgot-pass-link">Forgot Password?</Link>
+
+          <button className="login-button">Log In</button>
+        </form>
+
+        <p className="signup-text">
+          Don't have an account? <Link to="/signup">Sign Up now</Link>
+        </p>
       </div>
+    </div>
   );
 };
+
 export default Login;
