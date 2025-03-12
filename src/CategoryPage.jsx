@@ -19,7 +19,10 @@ const CategoryPage = () => {
 
   useEffect(() => {
     const subcategoryList = words.filter(
-    (word) => word.isCategory && word.category == categoryId && word.isCategoryId != categoryId
+      (word) =>
+        word.isCategory &&
+        word.category == categoryId &&
+        word.isCategoryId != categoryId
     );
     setSubcategories(subcategoryList);
 
@@ -59,10 +62,10 @@ const CategoryPage = () => {
           {subcategories.map((subcategory) => (
             <div
               key={subcategory.id}
-              className="col-6 col-sm-4 col-md-3 col-lg-2"
+              className="col-6 col-sm-4 col-md-3 col-lg-3 d-flex align-items-stretch"
             >
               <Link
-                className="category-button text-center p-4"
+                className="category-button"
                 to={`/category/${subcategory.isCategoryId}`}
                 state={{
                   words: words,
@@ -87,7 +90,10 @@ const CategoryPage = () => {
 
           {/* Words (with light yellow background) */}
           {filteredWords.map((word) => (
-            <div key={word.id} className="col-6 col-sm-4 col-md-3 col-lg-2">
+            <div
+              key={word.id}
+              className="col-6 col-sm-4 col-md-3 col-lg-3 d-flex align-items-stretch"
+            >
               <button
                 className="word-button d-block text-center"
                 onClick={() => handlePlay(word.word)}
