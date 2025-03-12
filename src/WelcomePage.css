@@ -67,6 +67,10 @@
 .welcome-footer ul {
   list-style: none;
   padding: 0;
+  padding: 0;
+  display: flex; 
+  justify-content: center; 
+  gap: 1.5rem;
 }
 
 .welcome-footer li {

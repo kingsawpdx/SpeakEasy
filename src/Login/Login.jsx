@@ -1,6 +1,12 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { Link } from "react-router-dom";
+
+ 
+console.log("Login component is rendering!");
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,10 +17,8 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-
-    // Simulate authentication (replace with real API request)
     if (email === "test@example.com" && password === "password123") {
-      navigate("/"); // Redirect to homepage
+      navigate("/"); 
     } else {
       setError("Invalid email or password.");
     }
@@ -22,9 +26,10 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      <h2>Login</h2>
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleLogin}>
+        <h2>Login</h2>
+        <div className = "input-wrapper">
         <input 
           type="email" 
           placeholder="Email" 
@@ -32,6 +37,10 @@ const Login = () => {
           onChange={(e) => setEmail(e.target.value)} 
           required 
         />
+        <AiOutlineMail className="icon" />
+        </div>
+
+        <div className = "input-wrapper">
         <input 
           type="password" 
           placeholder="Password" 
@@ -39,12 +48,16 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)} 
           required 
         />
-        <button type="submit">Login</button>
-      </form>
-      <p>Don't have an account? <Link to="/signup">Sign up</Link></p>
+        <AiOutlineLock className="icon" />
+        </div>
 
-    </div>
+        <a href="#" className ="forgot-pass-link">Forgot Password</a>
+        <button className="login-button">Login</button>
+        <p className="signup-text">Don&apos;t have an account? <Link to="/signup">Sign Up Now</Link>
+</p>
+
+      </form>
+      </div>
   );
 };
-
 export default Login;

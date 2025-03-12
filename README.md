@@ -49,5 +49,3 @@ To set up the front-end:
 npm run dev
 ```
  
- ```npm install react-icons
-```

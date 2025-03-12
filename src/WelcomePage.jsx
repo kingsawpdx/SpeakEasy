@@ -39,7 +39,7 @@ const WelcomePage = () => {
       <footer className="welcome-footer">
         <h3>Contacts</h3>
         <ul>
-          <li><FaEnvelope /> <a href="mailto:SpeakEasy@example.com">SpeakEasy@example.com</a></li>
+          <li><FaEnvelope /> <a href="mailto:SpeakEasy@gmail.com">SpeakEasy@example.com</a></li>
           <li><FaYoutube style={{ color: "red" }} /> <a href="https://www.youtube.com/yourchannel" target="_blank" rel="noopener noreferrer">YouTube Channel</a></li>
           <li><FaInstagram style={{ color: "#E1306C" }} /> <a href="https://www.instagram.com/yourprofile" target="_blank" rel="noopener noreferrer">Instagram Profile</a></li>
         </ul>

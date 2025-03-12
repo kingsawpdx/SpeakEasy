@@ -30,6 +30,11 @@ const SignUp = () => {
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSignUp}>
         <input 
+        type="text" 
+        placeholder="Full Name" 
+        required />
+        
+        <input 
           type="email" 
           placeholder="Email" 
           value={email} 
