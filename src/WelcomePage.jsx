@@ -15,7 +15,7 @@ const WelcomePage = () => {
   
 
   return (
-    <div className="welcome-container">
+    <div className="welcome-container" >
       <header className="welcome-header">
       <h1 className="logo">SpeakEasy</h1>
   

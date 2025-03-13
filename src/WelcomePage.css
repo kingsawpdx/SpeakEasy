@@ -1,4 +1,4 @@
-.welcome-container {
+.welcome-container  {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,14 +6,14 @@
   min-height: 100vh;
   width: 100%;
   font-family: Palatino, URW Palladio L, serif;
+  padding: 0;
 }
-
 
 .welcome-header {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 1rem;
+  padding: 1.3rem;
   background-color: black;
   flex-wrap: wrap;
   align-items: center;
@@ -26,7 +26,7 @@
 }
 
 .logo {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   color: white;
   padding: 1rem;
@@ -175,3 +175,19 @@
     gap: 1rem;
   }
 }
+
+.welcome-page-no-scroll {
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Ensure body only stops scrolling on WelcomePage */
+.welcome-container {
+  height: 100vh;
+  overflow: hidden;
+}
+
+body:has(.welcome-container) {
+  overflow: hidden;
+}
+
