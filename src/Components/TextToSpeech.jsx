@@ -67,8 +67,8 @@ function TextToSpeech({
         Speed:
         <input 
         type="range" 
-        min="0.5" m
-        ax="2" step="0.1" 
+        min="0.5" 
+        max="2" step="0.1" 
         value={rate} 
         onChange={handleRateChange} />
       </label>
