@@ -15,8 +15,3 @@ function App() {
 }
 
 export default App;
-
-//<Routes>
-//<Route path="/" element={<App />} />
-//<Route path="/category/:categoryId" element={<CategoryPage />} />
-//</Routes>
