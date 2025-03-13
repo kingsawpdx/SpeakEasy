@@ -18,13 +18,7 @@ const WelcomePage = () => {
     <div className="welcome-container" >
       <header className="welcome-header">
       <h1 className="logo">SpeakEasy</h1>
-  
-        <div className="auth-buttons">
-          <button className="header-button" onClick={() => navigate("/login")}>Login</button>
-          <button className="header-button signup-button" onClick={() => navigate("/signup")}>Sign Up</button>
-        </div>
       </header>
-
 
       <div className="content">
         <p className="intro-text">
