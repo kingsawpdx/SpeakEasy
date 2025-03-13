@@ -1,28 +1,36 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useParams, Link } from 'react-router-dom';
-import Header from './Header';
-import TextToSpeech from './Components/TextToSpeech';
+import { useEffect, useState } from "react";
+import { useLocation, useParams, Link } from "react-router-dom";
+import Header from "./Header";
+import TextToSpeech from "./Components/TextToSpeech";
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
   const location = useLocation();
 
   const [words] = useState(location.state?.words || []);
-  const [category] = useState(location.state?.category || '');
+  const [category] = useState(location.state?.category || "");
 
   const [subcategories, setSubcategories] = useState([]);
   const [filteredWords, setFilteredWords] = useState([]);
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [play, setPlay] = useState(false);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
 
   // State to toggle TTS settings visibility
   const [showTTS, setShowTTS] = useState(false);
 
+  // State for TTS settings
+  const [voice, setVoice] = useState(null);
+  const [pitch, setPitch] = useState(1);
+  const [rate, setRate] = useState(1);
+
   useEffect(() => {
     const subcategoryList = words.filter(
-    (word) => word.isCategory && word.category == categoryId && word.isCategoryId != categoryId
+      (word) =>
+        word.isCategory &&
+        word.category == categoryId &&
+        word.isCategoryId != categoryId
     );
     setSubcategories(subcategoryList);
 
@@ -32,25 +40,37 @@ const CategoryPage = () => {
     setFilteredWords(wordList);
   }, [words, categoryId]);
 
+ //new 
   const handlePlay = (word) => {
-    setText((prevText) => `${prevText} ${word}`);
-    setInput(word);
-    setPlay(true);
+  setText((prevText) => `${prevText} ${word}`);
+  speak(word);
+};
+
+// Function to trigger speech synthesis
+const speak = (word) => {
+  const speechSynthesis = window.speechSynthesis;
+  const audio = new SpeechSynthesisUtterance(word);
+  audio.voice = voice;
+  audio.pitch = pitch;
+  audio.rate = rate;
+  speechSynthesis.speak(audio);
+};
+
+  const clearHeader = () => setText("");
+
+  const playHeader = () => {
+    if (text.trim()) {
+      speak(text);
+    }
   };
 
-  const clearHeader = () => setText('');
-  const playHeader = () => {
-    setInput(text);
-    setPlay(true);
-  };
   useEffect(() => {
     if (play) setPlay(false);
   }, [play]);
 
   const toggleTTS = () => {
-    setShowTTS((prev) => !prev); 
+    setShowTTS((prev) => !prev);
   };
-
 
   return (
     <div className="container-fluid p-0">
@@ -83,7 +103,7 @@ const CategoryPage = () => {
                     src={subcategory.image}
                     alt={subcategory.word}
                     className="mb-3"
-                    style={{ height: '100px', objectFit: 'contain' }}
+                    style={{ height: "100px", objectFit: "contain" }}
                   />
                 )}
                 <span>
@@ -106,7 +126,7 @@ const CategoryPage = () => {
                     className="mb-3"
                     src={word.image}
                     alt={word.word}
-                    style={{ height: '100px', objectFit: 'contain' }}
+                    style={{ height: "100px", objectFit: "contain" }}
                   />
                 )}
                 <p>{word.word}</p>
@@ -130,10 +150,21 @@ const CategoryPage = () => {
             zIndex: 1000,
           }}
         >
-        <TextToSpeech data={input} playAudio={play} displaySettings={showTTS} changeSettings={() => setShowTTS(false)} />
-    </div>
+          <TextToSpeech
+            data={input}
+            playAudio={play}
+            displaySettings={showTTS}
+            changeSettings={() => setShowTTS(false)}
+            voice={voice}
+            setVoice={setVoice}
+            pitch={pitch}
+            setPitch={setPitch}
+            rate={rate}
+            setRate={setRate}
+          />
+        </div>
       )}
-      </div>
+    </div>
   );
 };
 
