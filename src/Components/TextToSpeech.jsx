@@ -60,9 +60,7 @@ function TextToSpeech({
         step="0.1" 
         value={pitch} onChange={handlePitchChange} />
       </label>
-
       <br />
-
       <label>
         Speed:
         <input 
@@ -72,7 +70,6 @@ function TextToSpeech({
         value={rate} 
         onChange={handleRateChange} />
       </label>
-
       <br />
       <button onClick={changeSettings}>Submit</button>
     </div>
