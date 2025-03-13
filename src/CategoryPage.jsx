@@ -17,12 +17,12 @@ const CategoryPage = () => {
   const [play, setPlay] = useState(false);
   const [input, setInput] = useState('');
 
+  // State to toggle TTS settings visibility
+  const [showTTS, setShowTTS] = useState(false);
+
   useEffect(() => {
     const subcategoryList = words.filter(
-      (word) =>
-        word.isCategory &&
-        word.category == categoryId &&
-        word.isCategoryId != categoryId
+    (word) => word.isCategory && word.category == categoryId && word.isCategoryId != categoryId
     );
     setSubcategories(subcategoryList);
 
@@ -47,6 +47,11 @@ const CategoryPage = () => {
     if (play) setPlay(false);
   }, [play]);
 
+  const toggleTTS = () => {
+    setShowTTS((prev) => !prev); 
+  };
+
+
   return (
     <div className="container-fluid p-0">
       <Header
@@ -54,6 +59,7 @@ const CategoryPage = () => {
         text={text}
         clearHeader={clearHeader}
         playHeader={playHeader}
+        toggleTTS={toggleTTS}
       />
 
       <div className="category-main">
@@ -62,10 +68,10 @@ const CategoryPage = () => {
           {subcategories.map((subcategory) => (
             <div
               key={subcategory.id}
-              className="col-6 col-sm-4 col-md-3 col-lg-3 d-flex align-items-stretch"
+              className="col-6 col-sm-4 col-md-3 col-lg-2"
             >
               <Link
-                className="category-button"
+                className="category-button text-center p-4"
                 to={`/category/${subcategory.isCategoryId}`}
                 state={{
                   words: words,
@@ -90,10 +96,7 @@ const CategoryPage = () => {
 
           {/* Words (with light yellow background) */}
           {filteredWords.map((word) => (
-            <div
-              key={word.id}
-              className="col-6 col-sm-4 col-md-3 col-lg-3 d-flex align-items-stretch"
-            >
+            <div key={word.id} className="col-6 col-sm-4 col-md-3 col-lg-2">
               <button
                 className="word-button d-block text-center"
                 onClick={() => handlePlay(word.word)}
@@ -113,8 +116,24 @@ const CategoryPage = () => {
         </div>
       </div>
 
-      <TextToSpeech data={input} playAudio={play} />
+      {showTTS && (
+        <div
+          className="tts-popup"
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            backgroundColor: "white",
+            padding: "20px",
+            borderRadius: "10px",
+            boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
+            zIndex: 1000,
+          }}
+        >
+        <TextToSpeech data={input} playAudio={play} displaySettings={showTTS} changeSettings={() => setShowTTS(false)} />
     </div>
+      )}
+      </div>
   );
 };
 
