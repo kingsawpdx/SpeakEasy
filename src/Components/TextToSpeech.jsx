@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function TextToSpeech({ data, playAudio, displaySettings, changeSettings }) {
   const [voice, setVoice] = useState(null);
   const [pitch, setPitch] = useState(1);
   const [rate, setRate] = useState(1);
 
+{/*}
   if (playAudio) {
     try {
       const speechSynthesis = window.speechSynthesis;
@@ -17,6 +18,24 @@ function TextToSpeech({ data, playAudio, displaySettings, changeSettings }) {
       console.error("Speech synthesis failed:", error);
     }
   }
+*/}
+
+
+  useEffect(() => {
+    if (playAudio && data) {
+      try {
+        const speechSynthesis = window.speechSynthesis;
+        const audio = new SpeechSynthesisUtterance(data);
+        audio.voice = voice;
+        audio.pitch = pitch;
+        audio.rate = rate;
+        speechSynthesis.speak(audio);
+      } catch (error) {
+        console.error("Speech synthesis failed:", error); //run ehen value changes 
+      }
+    }
+  }, [playAudio, data, voice, pitch, rate]);
+
 
   const handleVoiceChange = (event) => {
     const voices = window.speechSynthesis.getVoices();
@@ -32,7 +51,18 @@ function TextToSpeech({ data, playAudio, displaySettings, changeSettings }) {
   };
 
   return displaySettings ? (
-    <div>
+    <div
+    style={{
+      position: "fixed",
+      bottom: "20px",
+      right: "20px",
+      backgroundColor: "white",
+      padding: "20px",
+      borderRadius: "10px",
+      boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
+      zIndex: 1000,
+    }}
+    >
       <label>
         Voice:
         <select value={voice?.name} onChange={handleVoiceChange}>

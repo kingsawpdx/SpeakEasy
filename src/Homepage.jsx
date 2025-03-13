@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
 
+
 const Homepage = () => {
   const [categories, setCategories] = useState([]);
   const [words, setWords] = useState([]);

@@ -8,6 +8,7 @@ import { createClient } from "@supabase/supabase-js";
 
 dotenv.config({ path: "../.env" });
 
+
 const API_KEY = process.env.API_KEY;
 const PROJECT_URL = process.env.PROJECT_URL;
 
