@@ -38,7 +38,7 @@ app.post("/categories", async (req, res) => {
   const { data, error } = await supabase.from("categories").insert({
     name: req.body.name,
   });
-  if (error) return res.send(error);
+  if (error) return res.status(500).json(error);
   res.json({ message: "Successfully added category", addedCategory: data });
 });
 
