@@ -17,10 +17,10 @@ const CategoryPage = () => {
   const [play, setPlay] = useState(false);
   const [input, setInput] = useState("");
 
-  // State to toggle TTS settings visibility
+  //toggle TTS settings visibility
   const [showTTS, setShowTTS] = useState(false);
 
-  // State for TTS settings
+  //TTS settings
   const [voice, setVoice] = useState(null);
   const [pitch, setPitch] = useState(1);
   const [rate, setRate] = useState(1);
