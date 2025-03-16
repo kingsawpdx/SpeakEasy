@@ -10,6 +10,7 @@ dotenv.config({ path: "../.env" });
 
 const API_KEY = process.env.API_KEY;
 const PROJECT_URL = process.env.PROJECT_URL;
+const PORT=process.env.PORT || 3000;
 
 const app = express();
 
@@ -99,6 +100,6 @@ app.get("/", (req, res) => {
   res.send("SpeakEasy API...");
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log(`> Ready on http://localhost:3000`);
 });
