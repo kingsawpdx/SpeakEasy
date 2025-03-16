@@ -2,7 +2,7 @@ import { expect, test } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import '@testing-library/jest-dom'; 
-import Homepage from './Homepage';
+import Homepage from '../Homepage';
 
 test('displays loading message while fetching data', async () => {
   render(
