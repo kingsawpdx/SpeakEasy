@@ -15,19 +15,11 @@ const WelcomePage = () => {
   };
 
   
-  const handleSearch = async (event) => {
+  const handleSearch = (event) => {
     event.preventDefault();
     if (!searchQuery.trim()) return;
-
-    try {
-      const response = await fetch(`http://localhost:3000/words?query=${searchQuery}`);
-      const data = await response.json();
-      setSearchResults(data);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-    }
+    window.open(`https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`, "_blank");
   };
-
 
 
   return (
@@ -60,17 +52,6 @@ const WelcomePage = () => {
         </Link>
       </div>
 
-      /* Display Search Results */}
-      {searchResults.length > 0 && (
-        <div className="search-results">
-          <h3>Search Results:</h3>
-          <ul>
-            {searchResults.map((word) => (
-              <li key={word.id}>{word.name}</li>
-            ))}
-          </ul>
-        </div>
-      )}
 
       <footer className="welcome-footer">
         <h3>Contacts</h3>
