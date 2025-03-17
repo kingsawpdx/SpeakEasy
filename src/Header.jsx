@@ -1,4 +1,4 @@
-const Header = ({ category, text, clearHeader, playHeader, toggleTTS}) => {
+const Header = ({ category, text, clearHeader, playHeader, toggleTTS, deleteWord}) => {
   if (category) {
     console.log(category);
     category = category.charAt(0).toUpperCase() + category.slice(1);
@@ -53,6 +53,20 @@ const Header = ({ category, text, clearHeader, playHeader, toggleTTS}) => {
           >
             Clear
           </button>
+
+        {/* DELETE BUTTON */}
+        <button
+            onClick={deleteWord}
+            style={{
+              backgroundColor: "grey",
+              color: "white",
+              borderRadius: "10px",
+              marginRight: "10px",
+            }}
+          >
+            Delete Word
+          </button>
+
           <button
             onClick={playHeader}
             style={{
@@ -76,6 +90,7 @@ const Header = ({ category, text, clearHeader, playHeader, toggleTTS}) => {
           >
             TTS Settings
           </button>
+
 
 
         </div>
