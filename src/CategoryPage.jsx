@@ -74,6 +74,16 @@ const speak = (word) => {
     setShowTTS((prev) => !prev);
   };
 
+  const deleteWord = () => {
+    setText((prevText) => {
+      const wordsArray = prevText.trim().split(" ");
+      wordsArray.pop(); // Remove the last word
+      return wordsArray.join(" ");
+    });
+  };
+
+
+  
   return (
     <div className="container-fluid p-0 d-flex">
     {/* Sidebar */}
@@ -85,6 +95,7 @@ const speak = (word) => {
         clearHeader={clearHeader}
         playHeader={playHeader}
         toggleTTS={toggleTTS}
+        deleteWord={deleteWord}
       />
 
       <div className="category-main">
