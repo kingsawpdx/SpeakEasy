@@ -1,0 +1,31 @@
+.sidebar {
+  width: 200px;
+  background:lightblue;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  padding-top: 50px;
+}
+
+.category-main {
+  margin-left: 220px;
+  width: calc(100% - 220px);
+  padding: 20px;
+}
+
+.sidebar h5 {
+  font-size: 20px;
+  text-decoration: underline;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+.sidebar-button:hover {
+  background: #e9ecef;
+}
+
+
+

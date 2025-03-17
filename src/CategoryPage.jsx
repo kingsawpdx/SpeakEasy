@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
-import { useLocation, useParams, Link } from "react-router-dom";
-import Header from "./Header";
-import TextToSpeech from "./Components/TextToSpeech";
+import { useEffect, useState } from 'react';
+import { useLocation, useParams, Link } from 'react-router-dom';
+import Header from './Header';
+import TextToSpeech from './Components/TextToSpeech';
+import SideBar from './SideBar';
+
 
 const CategoryPage = () => {
   const { categoryId } = useParams();
@@ -73,7 +75,10 @@ const speak = (word) => {
   };
 
   return (
-    <div className="container-fluid p-0">
+    <div className="container-fluid p-0 d-flex">
+    {/* Sidebar */}
+     <SideBar handlePlay={handlePlay} />
+
       <Header
         category={category}
         text={text}
@@ -83,7 +88,7 @@ const speak = (word) => {
       />
 
       <div className="category-main">
-        <div className="row g-4 mt-5">
+        <div className="row g-4 ">
           {/* Subcategories (with blue background) */}
           {subcategories.map((subcategory) => (
             <div
