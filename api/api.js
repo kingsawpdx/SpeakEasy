@@ -22,9 +22,26 @@ app.use(cors());
 
 const supabase = createClient(PROJECT_URL, API_KEY);
 
-app.get("/words", async (req, res) => {
+/*app.get("/words", async (req, res) => {
   const { data, error } = await supabase.from("words").select();
   if (error) return res.status(500).json({ error: error.message });
+  res.json(data);
+});*/
+
+app.get("/words", async (req, res) => {
+  const { query } = req.query;
+
+  let request = supabase.from("words").select();
+
+  // If there's a search query, filter results
+  if (query) {
+    request = request.ilike("word", `%${query}%`); // Case-insensitive search
+  }
+
+  const { data, error } = await request;
+  
+  if (error) return res.status(500).json({ error: error.message });
+
   res.json(data);
 });
 
