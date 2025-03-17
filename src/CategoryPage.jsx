@@ -10,14 +10,22 @@ const CategoryPage = () => {
   const location = useLocation();
 
   const [words] = useState(location.state?.words || []);
-  const [category] = useState(location.state?.category || '');
+  const [category] = useState(location.state?.category || "");
 
   const [subcategories, setSubcategories] = useState([]);
   const [filteredWords, setFilteredWords] = useState([]);
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState("");
   const [play, setPlay] = useState(false);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
+
+  //toggle TTS settings visibility
+  const [showTTS, setShowTTS] = useState(false);
+
+  //TTS settings
+  const [voice, setVoice] = useState(null);
+  const [pitch, setPitch] = useState(1);
+  const [rate, setRate] = useState(1);
 
   useEffect(() => {
     const subcategoryList = words.filter(
@@ -34,20 +42,37 @@ const CategoryPage = () => {
     setFilteredWords(wordList);
   }, [words, categoryId]);
 
+ //new 
   const handlePlay = (word) => {
-    setText((prevText) => `${prevText} ${word}`);
-    setInput(word);
-    setPlay(true);
+  setText((prevText) => `${prevText} ${word}`);
+  speak(word);
+};
+
+// Function to trigger speech synthesis
+const speak = (word) => {
+  const speechSynthesis = window.speechSynthesis;
+  const audio = new SpeechSynthesisUtterance(word);
+  audio.voice = voice;
+  audio.pitch = pitch;
+  audio.rate = rate;
+  speechSynthesis.speak(audio);
+};
+
+  const clearHeader = () => setText("");
+
+  const playHeader = () => {
+    if (text.trim()) {
+      speak(text);
+    }
   };
 
-  const clearHeader = () => setText('');
-  const playHeader = () => {
-    setInput(text);
-    setPlay(true);
-  };
   useEffect(() => {
     if (play) setPlay(false);
   }, [play]);
+
+  const toggleTTS = () => {
+    setShowTTS((prev) => !prev);
+  };
 
   return (
     <div className="container-fluid p-0 d-flex">
@@ -59,6 +84,7 @@ const CategoryPage = () => {
         text={text}
         clearHeader={clearHeader}
         playHeader={playHeader}
+        toggleTTS={toggleTTS}
       />
 
       <div className="category-main">
@@ -67,10 +93,10 @@ const CategoryPage = () => {
           {subcategories.map((subcategory) => (
             <div
               key={subcategory.id}
-              className="col-6 col-sm-4 col-md-3 col-lg-3 d-flex align-items-stretch"
+              className="col-6 col-sm-4 col-md-3 col-lg-2"
             >
               <Link
-                className="category-button"
+                className="category-button text-center p-4"
                 to={`/category/${subcategory.isCategoryId}`}
                 state={{
                   words: words,
@@ -82,7 +108,7 @@ const CategoryPage = () => {
                     src={subcategory.image}
                     alt={subcategory.word}
                     className="mb-3"
-                    style={{ height: '100px', objectFit: 'contain' }}
+                    style={{ height: "100px", objectFit: "contain" }}
                   />
                 )}
                 <span>
@@ -95,10 +121,7 @@ const CategoryPage = () => {
 
           {/* Words (with light yellow background) */}
           {filteredWords.map((word) => (
-            <div
-              key={word.id}
-              className="col-6 col-sm-4 col-md-3 col-lg-3 d-flex align-items-stretch"
-            >
+            <div key={word.id} className="col-6 col-sm-4 col-md-3 col-lg-2">
               <button
                 className="word-button d-block text-center"
                 onClick={() => handlePlay(word.word)}
@@ -108,7 +131,7 @@ const CategoryPage = () => {
                     className="mb-3"
                     src={word.image}
                     alt={word.word}
-                    style={{ height: '100px', objectFit: 'contain' }}
+                    style={{ height: "100px", objectFit: "contain" }}
                   />
                 )}
                 <p>{word.word}</p>
@@ -118,7 +141,34 @@ const CategoryPage = () => {
         </div>
       </div>
 
-      <TextToSpeech data={input} playAudio={play} />
+      {showTTS && (
+        <div
+          className="tts-popup"
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "20px",
+            backgroundColor: "white",
+            padding: "20px",
+            borderRadius: "10px",
+            boxShadow: "0px 4px 6px rgba(0,0,0,0.1)",
+            zIndex: 1000,
+          }}
+        >
+          <TextToSpeech
+            data={input}
+            playAudio={play}
+            displaySettings={showTTS}
+            changeSettings={() => setShowTTS(false)}
+            voice={voice}
+            setVoice={setVoice}
+            pitch={pitch}
+            setPitch={setPitch}
+            rate={rate}
+            setRate={setRate}
+          />
+        </div>
+      )}
     </div>
   );
 };
