@@ -62,7 +62,7 @@ const CategoryPage = () => {
       />
 
       <div className="category-main">
-        <div className="row g-4 mt-5">
+        <div className="row g-4 ">
           {/* Subcategories (with blue background) */}
           {subcategories.map((subcategory) => (
             <div

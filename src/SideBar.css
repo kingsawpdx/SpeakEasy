@@ -1,6 +1,6 @@
 .sidebar {
   width: 200px;
-  background:blue;
+  background:lightblue;
   height: 100vh;
   position: fixed;
   left: 0;
@@ -15,7 +15,17 @@
   padding: 20px;
 }
 
-.h5 {
-  font-size: small;
+.sidebar h5 {
+  font-size: 18px;
+  text-decoration: underline;
+  text-align: center;
+  margin-bottom: 10px;
 }
+
+
+.sidebar-button:hover {
+  background: #e9ecef;
+}
+
+
 

@@ -3,7 +3,7 @@ import './SideBar.css';
 const SideBar = ({ handlePlay }) => {
   const commonWords = [
     { id: 1, word: "I" },
-    { id: 2, word: "I want" },
+    { id: 2, word: "I like" },
     { id: 2, word: "I want" },
     { id: 3, word: "I need" },
     { id: 4, word: "Hello" },
@@ -15,12 +15,12 @@ const SideBar = ({ handlePlay }) => {
 
   return (
     <div className="sidebar fixed-left p-4" style={{ width: '180px', background: 'lightblue', height: '100vh', overflowY: 'auto', marginTop:'170px'}}>
-      <h5 className="text-center mb-1">Common Words</h5>
-      <div className="d-flex flex-column">
+      <h5 className="text-center mb-4">Common Words</h5>
+      <div className="d-flex flex-column " >
         {commonWords.map((item) => (
           <button
             key={item.id}
-            className="btn btn-light mb-2 sidebar-button"
+            className="btn btn-light mb-1 sidebar-button"
             onClick={() => handlePlay(item.word)}
             style={{ border: '2px solid black', borderRadius: '10px', padding: '10px' }}
           >
