@@ -1,11 +1,20 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from './Header';
+import TextToSpeech from './Components/TextToSpeech';
 
 const Homepage = () => {
   const [categories, setCategories] = useState([]);
   const [words, setWords] = useState([]);
   const [loading, setLoading] = useState(true);
+
+    //toggle TTS settings visibility
+    const [showTTS, setShowTTS] = useState(false);
+
+    //TTS settings
+    const [voice, setVoice] = useState(null);
+    const [pitch, setPitch] = useState(1);
+    const [rate, setRate] = useState(1);
 
   // Fetch categories and words
   useEffect(() => {
@@ -25,7 +34,7 @@ const Homepage = () => {
 
   return (
     <div className="container-fluid p-0">
-      <Header />
+      <Header toggleTTS={() => setShowTTS((prev) => !prev)}  />
 
       <div className="container mt-5 pt-5">
         <div className="row">
@@ -65,6 +74,33 @@ const Homepage = () => {
           })}
         </div>
       </div>
+
+      {showTTS && (
+        <div
+          className="tts-popup"
+          style={{
+            position: 'fixed',
+            bottom: '20px',
+            right: '20px',
+            backgroundColor: 'white',
+            padding: '20px',
+            borderRadius: '10px',
+            boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+            zIndex: 1000,
+          }}
+        >
+          <TextToSpeech
+            displaySettings={showTTS}
+            changeSettings={() => setShowTTS(false)}
+            voice={voice}
+            setVoice={setVoice}
+            pitch={pitch}
+            setPitch={setPitch}
+            rate={rate}
+            setRate={setRate}
+          />
+        </div>
+      )}
     </div>
   );
 };
