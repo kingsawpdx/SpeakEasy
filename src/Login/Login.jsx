@@ -1,7 +1,7 @@
 // Login.jsx
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { supabase } from "../../api/supabaseClient";
+//import { supabase } from "../../api/supabaseClient";
 import "./Login.css";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../../api/supabaseClient";
+//import { supabase } from "../../api/supabaseClient";
 import "./SignUp.css";
 import { Link } from "react-router-dom";
 import { AiOutlineMail, AiOutlineLock, AiOutlineUser } from "react-icons/ai";
