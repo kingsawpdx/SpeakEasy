@@ -1,9 +1,9 @@
-
+// Login.jsx
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { supabase } from "../../api/supabaseClient";
 import "./Login.css";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
-
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -14,36 +14,33 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
-    if (email === "test@example.com" && password === "password123") {
-      navigate("/"); 
+    
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      setError(error.message);
     } else {
-      setError("Invalid email or password.");
+      navigate("/");
     }
   };
-  
 
   return (
     <div className="auth-container">
       <div className="login-box">
         <h2>Log in with</h2>
-
         <div className="social-login">
           <button className="social-button">
-            <img src="google.svg" alt="Google" className = "social-icon" />
+            <img src="google.svg" alt="Google" className="social-icon" />
             Google
           </button>
-
-          <button className ="social-button">  
-          <img src="apple.svg" alt=" Apple" className="social-icon"/>
-          Apple
+          <button className="social-button">
+            <img src="apple.svg" alt="Apple" className="social-icon" />
+            Apple
           </button>
         </div>
-        
         <p className="separator"><span>or</span></p>
-
         <form onSubmit={handleLogin}>
           {error && <p className="error-message">{error}</p>}
-
           <div className="input-wrapper">
             <AiOutlineMail className="input-icon" />
             <input 
@@ -54,7 +51,6 @@ const Login = () => {
               required 
             />
           </div>
-
           <div className="input-wrapper">
             <AiOutlineLock className="input-icon" />
             <input 
@@ -65,12 +61,9 @@ const Login = () => {
               required 
             />
           </div>
-
           <Link to="#" className="forgot-pass-link">Forgot Password?</Link>
-
           <button className="login-button">Log In</button>
         </form>
-
         <p className="signup-text">
           Don't have an account? <Link to="/signup">Sign Up now</Link>
         </p>
